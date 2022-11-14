@@ -5,6 +5,7 @@ words as well.
 A Histogram problem.
 """
 import time
+import string
 #import os
 #import csv
 
@@ -18,13 +19,17 @@ try:
     lines = contents.split("\n")
     d = dict()
     for line in lines:
-        #print('Line: ',line)
+        print('Line: ',line)
+        #below line remove the punctuation from the string
+        line.translate(line.maketrans('','',string.punctuation))
+        #print('Formatted Line: ',line)
         words = line.split(' ')
-        for word in words:
-            if word in d:
-                d[word] = d[word]+1
-            else:
-                d[word] = 1
+        if len(words)>0:
+            for word in words:
+                if word in d:
+                    d[word] = d[word]+1
+                else:
+                    d[word] = 1
     
     l = list()
     
@@ -32,7 +37,7 @@ try:
         l.append((value,key))
     
     l = sorted(l, reverse=True)
-    #print(l)
+    print(l)
     for i in range(0,4):
         a,b = l[i]
         print(b)
